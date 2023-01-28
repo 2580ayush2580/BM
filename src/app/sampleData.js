@@ -6,7 +6,7 @@ export const bills = [
     description: "Dominos",
     category: "Food & Dining",
     amount: "430",
-    date: "01-02-2022",
+    date: "2022-01-02",
     isHighlight: false,
   },
   {
@@ -14,7 +14,7 @@ export const bills = [
     description: "Car wash",
     category: "Utility",
     amount: "500",
-    date: "01-06-2022",
+    date: "2022-06-01",
     isHighlight: false,
   },
   {
@@ -22,7 +22,7 @@ export const bills = [
     description: "Amazon",
     category: "Shopping",
     amount: "2030",
-    date: "01-07-2022",
+    date: "2022-01-07",
     isHighlight: false,
   },
   {
@@ -30,7 +30,7 @@ export const bills = [
     description: "House rent",
     category: "Food & Dining",
     amount: "35900",
-    date: "01-03-2022",
+    date: "2022-01-03",
     isHighlight: false,
   },
   {
@@ -38,7 +38,7 @@ export const bills = [
     description: "Tuition",
     category: "Education",
     amount: "2200",
-    date: "01-12-2022",
+    date: "2022-01-12",
     isHighlight: false,
   },
   {
@@ -46,7 +46,7 @@ export const bills = [
     description: "Laundry",
     category: "Personal Care",
     amount: "320",
-    date: "01-10-2022",
+    date: "2022-01-10",
     isHighlight: false,
   },
   {
@@ -54,7 +54,7 @@ export const bills = [
     description: "Vacation",
     category: "Travel",
     amount: "3430",
-    date: "01-10-2022",
+    date: "2022-01-10",
     isHighlight: false,
   },
 ];

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuid } from "uuid";
 import { bills, categories } from "../sampleData";
 
 let initialState = {
@@ -20,8 +19,8 @@ export const counterSlice = createSlice({
   reducers: {
     addBill: (state, action) => {
       state.bills.push({
-        id: uuid(),
-        description: action.payload.desc,
+        id: action.payload.id,
+        description: action.payload.description,
         date: action.payload.date,
         amount: action.payload.amount,
         category: action.payload.category,
