@@ -1,4 +1,6 @@
 .billLeftPart {
-  margin-top: 2rem;
-  width: 50%;
+  margin-top: 1rem;
+  width: 40%;
+  max-height: 75vh;
+  overflow: scroll;
 }

@@ -6,7 +6,7 @@ import styles from "./card.module.css";
 const Card = ({ data, handleEdit, handleDelete }) => {
   const { id, description, category, amount, date, isHighlight } = data;
   return (
-    <div className={`${styles.card} br-1`}>
+    <div className={`${styles.card} br-1 ${isHighlight ? "cardBg" : ""}`}>
       <div>
         <div className="flex justify-between">
           <div className={`${styles.heading}`}>{description}</div>

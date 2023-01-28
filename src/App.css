@@ -5,6 +5,19 @@
   font-size: 16px;
 }
 
+::-webkit-scrollbar {
+  width: 0.1em;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #17c95f;
+  outline: 1px solid #17c95f;
+}
+
 .m1 {
   margin: 1rem;
 }
@@ -12,6 +25,7 @@
 .fixed-container {
   max-width: 1200px;
   margin: auto;
+  padding: 0 1rem;
 }
 
 .primary {
@@ -79,6 +93,10 @@
 .required-field::after {
   content: "*";
   color: red;
+}
+
+.cardBg {
+  background-color: #ffff00;
 }
 
 @media only screen and (max-width: 500px) {
