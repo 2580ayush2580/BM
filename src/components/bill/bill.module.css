@@ -9,3 +9,8 @@
   width: 55%;
   height: 75vh;
 }
+
+.filter {
+  height: 2.4rem;
+  margin-right: 0.5rem;
+}

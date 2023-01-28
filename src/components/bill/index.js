@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 import Card from "../../container/card";
+import currencyFormatter from "currency-formatter";
 import { addBill, editBill, deleteBill } from "../../app/reducers/billReducer";
 import Form from "react-bootstrap/Form";
 import { Modal } from "react-bootstrap";
@@ -10,8 +11,12 @@ import Chart from "../chart";
 
 export function Bill() {
   const { bills, categories } = useSelector((state) => state.bills);
+  const totalAmount = bills.reduce((total, curr) => {
+    return total + parseInt(curr.amount);
+  }, 0);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState("");
   const [modalData, setModalData] = useState({
     heading: "",
     edit: false,
@@ -87,6 +92,12 @@ export function Bill() {
     });
   };
 
+  const handleFilter = (ev) => {
+    if (ev.target.value === "Reset Filter") {
+      setSelectedFilter("");
+    } else setSelectedFilter(ev.target.value);
+  };
+
   return (
     <div className="fixed-container flex justify-between">
       <Modal show={open} onHide={handleClose}>
@@ -152,29 +163,69 @@ export function Bill() {
         </Modal.Footer>
       </Modal>
       <div className={styles.homeLeftPart}>
-        <div className="mb-3">
-          <button
-            onClick={() => handleOpen("Add Bill", false, initialForm)}
-            className="btn btn-outline-success"
+        <div className="d-flex">
+          <Form.Select
+            onChange={handleFilter}
+            value={selectedFilter}
+            className={`${styles.filter} w-50`}
           >
-            + Add Bill
-          </button>
+            <option defaultValue>
+              {selectedFilter ? "Reset Filter" : " Select Category"}
+            </option>
+            {categories && categories.length > 0
+              ? categories.map((val, index) => {
+                  return <option key={`${val} ${index}`}>{val}</option>;
+                })
+              : null}
+          </Form.Select>
+          <div className="mb-3">
+            <button
+              onClick={() => handleOpen("Add Bill", false, initialForm)}
+              className="btn btn-outline-success"
+            >
+              + Add Bill
+            </button>
+          </div>
         </div>
         {bills && bills.length > 0
-          ? bills.map((data) => {
-              return (
-                <Card
-                  key={data?.id}
-                  data={data}
-                  handleDelete={handleDelete}
-                  handleEdit={() => handleOpen("Edit Bill", true, data)}
-                />
-              );
-            })
+          ? selectedFilter
+            ? bills
+                .filter(
+                  (bill) =>
+                    bill.category.toLowerCase() === selectedFilter.toLowerCase()
+                )
+                .map((data) => {
+                  return (
+                    <Card
+                      key={data?.id}
+                      data={data}
+                      handleDelete={handleDelete}
+                      handleEdit={() => handleOpen("Edit Bill", true, data)}
+                    />
+                  );
+                })
+            : bills.map((data) => {
+                return (
+                  <Card
+                    key={data?.id}
+                    data={data}
+                    handleDelete={handleDelete}
+                    handleEdit={() => handleOpen("Edit Bill", true, data)}
+                  />
+                );
+              })
           : null}
       </div>
       <div className={styles.homeRightPart}>
         <Chart />
+        <h4 className="mt-3">
+          Total Spend=
+          <span className="primary">
+            <h4 className="d-inline-block">
+              {currencyFormatter.format(totalAmount, { code: "INR" })}{" "}
+            </h4>
+          </span>
+        </h4>
       </div>
     </div>
   );
