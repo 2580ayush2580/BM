@@ -5,6 +5,16 @@
   font-size: 16px;
 }
 
+.m1 {
+  margin: 1rem;
+}
+
+.app {
+  max-width: 1200px;
+  margin: auto;
+  height: 100vh;
+}
+
 .primary {
   color: #17c95f;
 }

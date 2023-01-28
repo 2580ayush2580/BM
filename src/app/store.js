@@ -3,6 +3,6 @@ import billReducer from "./reducers/billReducer";
 
 export const store = configureStore({
   reducer: {
-    counter: billReducer,
+    bills: billReducer,
   },
 });

@@ -1,14 +1,18 @@
 import React from "react";
+import currencyFormatter from "currency-formatter";
+import PropTypes from "prop-types";
 import styles from "./card.module.css";
 
-const Card = (props) => {
-  const { category = "Hello" } = props;
+const Card = ({ data, handleEdit, handleDelete }) => {
+  const { id, description, category, amount, date, isHighlight } = data;
   return (
     <div className={`${styles.card} br-1`}>
       <div>
         <div className="flex justify-between">
-          <div className={`${styles.heading}`}>{category}</div>
-          <div className={`${styles.price}`}>{category}</div>
+          <div className={`${styles.heading}`}>{description}</div>
+          <div className={`${styles.price}`}>
+            {currencyFormatter.format(amount, { code: "INR" })}
+          </div>
         </div>
         <div className="flex justify-between align-items-center">
           <div>
@@ -16,14 +20,20 @@ const Card = (props) => {
               {category}
             </span>
             <div className={`${styles.pill} bg-secondry secondry br-1`}>
-              {category}
+              {date}
             </div>
           </div>
-          <div>
-            <button className="btn btn-outline-primary custom-btn ">
+          <div className="">
+            <button
+              onClick={() => handleEdit()}
+              className="btn btn-outline-primary custom-btn "
+            >
               Edit
             </button>
-            <button className="btn btn-outline-danger custom-btn ">
+            <button
+              onClick={() => handleDelete(id)}
+              className="btn btn-outline-danger custom-btn "
+            >
               Delete
             </button>
           </div>
@@ -31,6 +41,18 @@ const Card = (props) => {
       </div>
     </div>
   );
+};
+
+Card.propTypes = {
+  data: PropTypes.object,
+  handleEdit: PropTypes.func,
+  handleDelete: PropTypes.func,
+};
+
+Card.defaultProps = {
+  data: {},
+  handleEdit: () => {},
+  handleDelete: () => {},
 };
 
 export default Card;

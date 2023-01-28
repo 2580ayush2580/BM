@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuid } from "uuid";
 import { bills, categories } from "../sampleData";
 
 let initialState = {
@@ -8,7 +9,9 @@ let initialState = {
 
 const billsData = localStorage.getItem("bills");
 if (billsData) {
-  initialState = billsData;
+  const parseData = JSON.parse(billsData);
+  console.log(parseData);
+  initialState = parseData;
 }
 
 export const counterSlice = createSlice({
@@ -16,14 +19,26 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     addBill: (state, action) => {
-      state.value += 1;
+      state.bills.push({
+        id: uuid(),
+        description: action.payload.desc,
+        date: action.payload.date,
+        amount: action.payload.amount,
+        category: action.payload.category,
+        isHighlight: false,
+      });
+      localStorage.setItem("bills", JSON.stringify(state));
     },
-    deleteBill: (state) => {
-      state.value -= 1;
+    deleteBill: (state, action) => {
+      const newBills = state.bills.filter(
+        (bill) => bill?.id !== action?.payload
+      );
+      state.bills = [...newBills];
+      localStorage.setItem("bills", JSON.stringify(state));
     },
   },
 });
 
-export const { increment, deleteBill } = counterSlice.actions;
+export const { addBill, deleteBill } = counterSlice.actions;
 
 export default counterSlice.reducer;
