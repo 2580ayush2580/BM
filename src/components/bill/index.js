@@ -6,6 +6,7 @@ import { addBill, editBill, deleteBill } from "../../app/reducers/billReducer";
 import Form from "react-bootstrap/Form";
 import { Modal } from "react-bootstrap";
 import styles from "./bill.module.css";
+import Chart from "../chart";
 
 export function Bill() {
   const { bills, categories } = useSelector((state) => state.bills);
@@ -87,7 +88,7 @@ export function Bill() {
   };
 
   return (
-    <div className="fixed-container">
+    <div className="fixed-container flex justify-between">
       <Modal show={open} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{modalData?.heading}</Modal.Title>
@@ -150,7 +151,7 @@ export function Bill() {
           </button>
         </Modal.Footer>
       </Modal>
-      <div className={styles.billLeftPart}>
+      <div className={styles.homeLeftPart}>
         <div className="mb-3">
           <button
             onClick={() => handleOpen("Add Bill", false, initialForm)}
@@ -171,6 +172,9 @@ export function Bill() {
               );
             })
           : null}
+      </div>
+      <div className={styles.homeRightPart}>
+        <Chart />
       </div>
     </div>
   );

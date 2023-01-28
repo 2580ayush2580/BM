@@ -1,6 +1,11 @@
-.billLeftPart {
+.homeLeftPart {
   margin-top: 1rem;
   width: 40%;
   max-height: 75vh;
   overflow: scroll;
+}
+
+.homeRightPart {
+  width: 55%;
+  height: 75vh;
 }

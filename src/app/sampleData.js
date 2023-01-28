@@ -14,7 +14,7 @@ export const bills = [
     description: "Car wash",
     category: "Utility",
     amount: "500",
-    date: "2022-06-01",
+    date: "2022-02-01",
     isHighlight: false,
   },
   {
@@ -22,15 +22,15 @@ export const bills = [
     description: "Amazon",
     category: "Shopping",
     amount: "2030",
-    date: "2022-01-07",
+    date: "2022-03-07",
     isHighlight: false,
   },
   {
     id: uuid(),
     description: "House rent",
     category: "Food & Dining",
-    amount: "35900",
-    date: "2022-01-03",
+    amount: "3590",
+    date: "2022-04-03",
     isHighlight: false,
   },
   {
@@ -38,7 +38,7 @@ export const bills = [
     description: "Tuition",
     category: "Education",
     amount: "2200",
-    date: "2022-01-12",
+    date: "2022-05-12",
     isHighlight: false,
   },
   {
@@ -46,7 +46,7 @@ export const bills = [
     description: "Laundry",
     category: "Personal Care",
     amount: "320",
-    date: "2022-01-10",
+    date: "2022-06-10",
     isHighlight: false,
   },
   {
@@ -54,7 +54,7 @@ export const bills = [
     description: "Vacation",
     category: "Travel",
     amount: "3430",
-    date: "2022-01-10",
+    date: "2022-07-10",
     isHighlight: false,
   },
 ];
