@@ -23,7 +23,7 @@ export const counterSlice = createSlice({
   reducers: {
     addBill: (state, action) => {
       const { id, description, amount, category, date } = action.payload;
-      state.bills.push({
+      state.bills.unshift({
         id,
         description,
         amount,

@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import { Modal } from "react-bootstrap";
 import styles from "./bill.module.css";
 
-export function Counter() {
+export function Bill() {
   const { bills, categories } = useSelector((state) => state.bills);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -87,7 +87,7 @@ export function Counter() {
   };
 
   return (
-    <>
+    <div className="fixed-container">
       <Modal show={open} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{modalData?.heading}</Modal.Title>
@@ -151,7 +151,7 @@ export function Counter() {
         </Modal.Footer>
       </Modal>
       <div className={styles.billLeftPart}>
-        <div className="m1">
+        <div className="mb-3">
           <button
             onClick={() => handleOpen("Add Bill", false, initialForm)}
             className="btn btn-outline-success"
@@ -172,6 +172,6 @@ export function Counter() {
             })
           : null}
       </div>
-    </>
+    </div>
   );
 }

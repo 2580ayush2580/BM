@@ -9,10 +9,9 @@
   margin: 1rem;
 }
 
-.app {
+.fixed-container {
   max-width: 1200px;
   margin: auto;
-  height: 100vh;
 }
 
 .primary {
@@ -81,5 +80,6 @@
   content: "*";
   color: red;
 }
+
 @media only screen and (max-width: 500px) {
 }
