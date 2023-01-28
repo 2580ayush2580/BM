@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 import Card from "../../container/card";
-import { addBill, deleteBill } from "../../app/reducers/billReducer";
+import { addBill, editBill, deleteBill } from "../../app/reducers/billReducer";
 import Form from "react-bootstrap/Form";
 import { Modal } from "react-bootstrap";
 import styles from "./bill.module.css";
@@ -50,7 +50,16 @@ export function Counter() {
 
   const handleEdit = (d) => {
     if (formData?.id) {
-      console.log(formData?.id);
+      dispatch(
+        editBill({
+          id: formData?.id,
+          description: formData?.description,
+          category: formData?.category,
+          amount: formData?.amount,
+          date: formData?.date,
+        })
+      );
+      handleClose();
     }
   };
 

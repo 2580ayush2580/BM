@@ -13,31 +13,48 @@ if (billsData) {
   initialState = parseData;
 }
 
+const setLocalStoragrData = (state) => {
+  localStorage.setItem("bills", JSON.stringify(state));
+};
+
 export const counterSlice = createSlice({
   name: "Bills",
   initialState,
   reducers: {
     addBill: (state, action) => {
+      const { id, description, amount, category, date } = action.payload;
       state.bills.push({
-        id: action.payload.id,
-        description: action.payload.description,
-        date: action.payload.date,
-        amount: action.payload.amount,
-        category: action.payload.category,
+        id,
+        description,
+        amount,
+        category,
+        date,
         isHighlight: false,
       });
-      localStorage.setItem("bills", JSON.stringify(state));
+      setLocalStoragrData(state);
+    },
+    editBill: (state, action) => {
+      const { id, description, amount, category, date } = action.payload;
+      state.bills.forEach((bill) => {
+        if (id === bill.id) {
+          bill.description = description;
+          bill.amount = amount;
+          bill.category = category;
+          bill.date = date;
+        }
+      });
+      setLocalStoragrData(state);
     },
     deleteBill: (state, action) => {
       const newBills = state.bills.filter(
         (bill) => bill?.id !== action?.payload
       );
       state.bills = [...newBills];
-      localStorage.setItem("bills", JSON.stringify(state));
+      setLocalStoragrData(state);
     },
   },
 });
 
-export const { addBill, deleteBill } = counterSlice.actions;
+export const { addBill, deleteBill, editBill } = counterSlice.actions;
 
 export default counterSlice.reducer;
