@@ -121,7 +121,7 @@ export function Bill() {
   };
 
   return (
-    <div className="fixed-container flex justify-between">
+    <div className={`${styles.homeBillWrapper} fixed-container`}>
       {console.log(bills)}
       <Modal show={open} onHide={handleClose}>
         <Modal.Header closeButton>

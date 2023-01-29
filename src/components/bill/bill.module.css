@@ -15,3 +15,21 @@
   height: 2.4rem;
   margin-right: 0.5rem;
 }
+
+.homeBillWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 500px) {
+  .homeBillWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .homeLeftPart {
+    width: 100%;
+  }
+  .homeRightPart {
+    width: 100%;
+  }
+}
