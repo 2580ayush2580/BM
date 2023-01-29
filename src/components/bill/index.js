@@ -38,8 +38,10 @@ export function Bill() {
 
   useEffect(() => {
     const budget = localStorage.getItem("budget");
+    console.log(budget);
     if (budget) {
-      setBudget(budget);
+      setBudgetValue(budget);
+      dispatch(setBudget(budget));
     }
   }, []);
 
@@ -115,7 +117,7 @@ export function Bill() {
     const budget = ev.target.value;
     setBudgetValue(budget);
     dispatch(setBudget(budget));
-    localStorage.getItem("budget", budget);
+    localStorage.setItem("budget", budget);
   };
 
   return (
