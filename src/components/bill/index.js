@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 import Card from "../../container/card";
 import currencyFormatter from "currency-formatter";
-import { addBill, editBill, deleteBill } from "../../app/reducers/billReducer";
+import {
+  addBill,
+  editBill,
+  deleteBill,
+  setBudget,
+} from "../../app/reducers/billReducer";
 import Form from "react-bootstrap/Form";
 import { Modal } from "react-bootstrap";
 import styles from "./bill.module.css";
@@ -17,6 +22,7 @@ export function Bill() {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("");
+  const [budgetValue, setBudgetValue] = useState("");
   const [modalData, setModalData] = useState({
     heading: "",
     edit: false,
@@ -29,6 +35,13 @@ export function Bill() {
     date: "",
   };
   const [formData, setFormData] = useState(initialForm);
+
+  useEffect(() => {
+    const budget = localStorage.getItem("budget");
+    if (budget) {
+      setBudget(budget);
+    }
+  }, []);
 
   const submissionAllowed =
     formData.description !== "" &&
@@ -98,8 +111,16 @@ export function Bill() {
     } else setSelectedFilter(ev.target.value);
   };
 
+  const handleBudget = (ev) => {
+    const budget = ev.target.value;
+    setBudgetValue(budget);
+    dispatch(setBudget(budget));
+    localStorage.getItem("budget", budget);
+  };
+
   return (
     <div className="fixed-container flex justify-between">
+      {console.log(bills)}
       <Modal show={open} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{modalData?.heading}</Modal.Title>
@@ -226,6 +247,14 @@ export function Bill() {
             </h4>
           </span>
         </h4>
+        <Form.Label className="mt-3">Enter Your Budget</Form.Label>
+        <Form.Control
+          type="number"
+          onChange={handleBudget}
+          value={budgetValue}
+          placeholder="Enter budget to highlight bills"
+          className="w-50"
+        />
       </div>
     </div>
   );

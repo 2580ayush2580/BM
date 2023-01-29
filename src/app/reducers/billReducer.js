@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { bills, categories } from "../sampleData";
+import { getHighlightedData } from "../../helper/highlight";
 
 let initialState = {
   bills,
@@ -52,9 +53,25 @@ export const counterSlice = createSlice({
       state.bills = [...newBills];
       setLocalStoragrData(state);
     },
+    setBudget: (state, action) => {
+      const newArray = getHighlightedData([...state.bills], action.payload);
+
+      state.bills.forEach((bill) => {
+        bill.isHighlight = false;
+      });
+
+      newArray.forEach((item) => {
+        state.bills.forEach((bill) => {
+          if (bill.id === item) {
+            bill.isHighlight = true;
+          }
+        });
+      });
+    },
   },
 });
 
-export const { addBill, deleteBill, editBill } = counterSlice.actions;
+export const { addBill, deleteBill, editBill, setBudget } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;
